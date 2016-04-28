@@ -1,0 +1,17 @@
+export(
+	"create.gene.meta.prognosis.plot",
+	"create.gene.meta.prognosis.plots",
+	"create.km.plot",
+	"create.meta.multifeature.prognosis.plot",
+	"create.meta.prognosis.plot",
+	"create.survival.plot",
+	"make.survfit.plot",
+	"make.survival.plot",
+	"make.survival.plot.ternary",
+	"schoenfeld.residual.plots"
+	);
+importFrom("grDevices", "dev.cur", "dev.off", "ps.options", "tiff");
+importFrom("graphics", "abline", "plot", "title");
+importFrom("stats", "C", "contr.treatment", "pchisq", "t.test");
+importFrom("utils", "read.table", "write.table"); 
+import ("BoutrosLab.plotting.general", "BoutrosLab.prognosticsignature.general", "BoutrosLab.statistics.general", "BoutrosLab.statistics.survival", "BoutrosLab.utilities", lattice,survival);

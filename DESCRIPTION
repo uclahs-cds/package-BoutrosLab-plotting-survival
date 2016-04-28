@@ -1,0 +1,12 @@
+Package: BoutrosLab.plotting.survival
+Version: 3.0.3
+Type: Package
+Title: Functions to Plot Survival Data
+Date: 2016-04-16
+Author: Dr. Paul C. Boutros
+Maintainer: Paul Boutros <Paul.Boutros@oicr.on.ca>
+Depends: R (>= 2.15.1), lattice (>= 0.20-6), survival (>= 2.36-14), BoutrosLab.statistics.survival (>= 0.3.4), BoutrosLab.prognosticsignature.general (>= 1.3.7), BoutrosLab.utilities (>= 1.4.2), BoutrosLab.plotting.general (>= 3.2.18), BoutrosLab.statistics.general (>= 2.0.6)
+Suggests: BoutrosLab.datasets.breast.cancer (>= 7.0.0), BoutrosLab.datasets.cervix.cancer (>= 1.0.1), BoutrosLab.datasets.gbm (>= 2.0.0), BoutrosLab.datasets.nsclc (>= 1.1.5), BoutrosLab.datasets.ovarian.cancer (>= 1.5.7), BoutrosLab.datasets.prostate.cancer (>= 2.3.1), BoutrosLab.datasets.prostate.cancer.methylation (>= 1.0.4), BoutrosLab.datasets.colon.cancer (>= 2.2.5), BoutrosLab.datasets.prostate.cancer.CNV (>= 1.1.1), BoutrosLab.datasets.breast.cancer.miRNA (>= 0.0.1)
+Description: Functions to plot survival data.
+License: GPL-2
+LazyLoad: yes
