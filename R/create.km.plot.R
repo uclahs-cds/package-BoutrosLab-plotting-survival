@@ -44,7 +44,8 @@ create.km.plot <- function(
 	risk.label.pos = NA,
 	risk.label.fontface = 'bold',
 	key.groups.title = NULL, 
-	key.groups.title.cex = 1.4, 
+	key.groups.title.cex = 1.4,
+	key.stats.cex = 1.5, 
 	explicit.HR.label = TRUE,
 	main = NULL, 
 	main.cex = 3.0,
@@ -64,7 +65,8 @@ create.km.plot <- function(
 	cox.zph.threshold = 0.1,
 	cox.zph.truncation.thresholds = c(5, 10),
 	show.key.groups = NA, 
-	show.risktable = TRUE, 
+	show.risktable = TRUE,
+	risktable.fontsize = NULL, 
 	key.groups.corner = c(0,0), 
 	key.groups.x.pos = 0, 
 	key.groups.y.pos = 0.01, 
@@ -669,7 +671,7 @@ create.km.plot <- function(
 #			       lab = c(statistical.result.hr, statistical.result.pvalue),
 				lab = c(result.zph, statistical.result.hr, statistical.result.pvalue),
 				col = 'black',
-				cex = 1.5
+				cex = key.stats.cex 
 				)
 			);
 		}
@@ -679,7 +681,7 @@ create.km.plot <- function(
 			text = list(
 				lab = statistical.result,
 				col = 'black',
-				cex = 1.5
+				cex = key.stats.cex
 				)
 			);
 		}
@@ -689,7 +691,7 @@ create.km.plot <- function(
 			text = list(
 				lab = statistical.result.pvalue,
 				col = 'black',
-				cex = 1.5
+				cex = key.stats.cex
 				)
 		);
 		}
@@ -815,8 +817,13 @@ create.km.plot <- function(
 			# localize the parameterization vector for readability
 			rows.to.use <- optimal.risktable.parameters$ngroups == ngroups;
 
-			# extract pre-set parameters
-			fontsize <- optimal.risktable.parameters$fontsize[rows.to.use];
+			# extract pre-set parameters overridden if input parameter is not NULL
+			if (!is.null(risktable.fontsize)) { 
+				fontsize <- risktable.fontsize;
+			}
+			else{
+				fontsize <- optimal.risktable.parameters$fontsize[rows.to.use];
+			}
 			risktable.height <- grid::unit(optimal.risktable.parameters$risktable.height[rows.to.use], 'npc');
 			risktable.y <- grid::unit(optimal.risktable.parameters$risktable.y[rows.to.use], 'npc');
 			bottom.padding <- optimal.risktable.parameters$bottom.padding[rows.to.use];

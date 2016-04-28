@@ -1,0 +1,4 @@
+BoutrosLab.plotting.survival 3.0.4 2016-04-28 (Jennifer Aguiar)
+-----------------------------------------------------------------
+MINOR UPDATES
+* Added risktable.fontsize and key.stats.cex parameters to create.km.plot to allow for adjustment of these fontsizes. Fontsizes default to optimal.risktable.paramters and 1.5, respectively (as these were the original hardcoded fontsizes for these parameters). 

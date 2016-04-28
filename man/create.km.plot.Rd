@@ -24,6 +24,7 @@ create.km.plot(
 	risk.label.fontface = 'bold',
 	key.groups.title = NULL, 
 	key.groups.title.cex = 1.4,
+	key.stats.cex = 1.5,
 	explicit.HR.label = TRUE,
 	main = NULL, 
 	main.cex = 3.0,
@@ -43,7 +44,8 @@ create.km.plot(
 	cox.zph.threshold = 0.1, 
 	cox.zph.truncation.thresholds = c(5, 10),
 	show.key.groups = NA, 
-	show.risktable = TRUE, 
+	show.risktable = TRUE,
+	risktable.fontsize = NULL, 
 	key.groups.corner = c(0,0), 
 	key.groups.x.pos = 0, 
 	key.groups.y.pos = 0.01, 
@@ -85,7 +87,8 @@ create.km.plot(
   \item{risk.label.pos}{A value for the x-axis position of the risk labels (in the risk table below the KM plot).  This value will typically be negative, in order for it to appear to the left of the value '0' on the x axis.}
   \item{risk.label.fontface}{font face of the risk group label.  Defaults to 'bold'.  Set it to NULL if plain font face is wanted for risk group label.}
   \item{key.groups.title}{Title for legend listing group names and line colours.  Defaults to NULL.}
-  \item{key.groups.title.cex}{Front size of title for legend listing group names and line colours.  Defaults to 2.2 (default cex for group names is 2).}
+  \item{key.groups.title.cex}{Font size of title for legend listing group names and line colours.  Defaults to 2.2 (default cex for group names is 2).}
+  \item{key.stats.cex}{Font size of the statisitcal results key. Defaults to 1.5}
   \item{explicit.HR.label}{If TRUE, prints the label for the comparison risk group in subscript to HR.  Only has an effect if the cox statistical method is used.  Defaults to TRUE.}
   \item{main}{The main title for the plot (space is reclaimed if NULL)}
   \item{main.cex}{Size of text for main plot title}
@@ -106,6 +109,7 @@ create.km.plot(
   \item{cox.zph.truncation.thresholds}{If ph.assumption.check is not 'ignore', and a variable fails the CPH assumption, a multi-point table will be generated with CPH results for all variables at multiple time points. The truncation points specified here, indicate the time points at which to split the survival data. See BoutrosLab.statistics.general/R/multi.point.HR.table.R}
   \item{show.key.groups}{Defaults to FALSE if there is only one risk group, to TRUE otherwise}
   \item{show.risktable}{Defaults to TRUE if there are optimal display values listed for the corresponding number of risk groups in the optimal.risktable.parameters.txt file in the inst directory (currently for 1 to 10 risk groups).  Otherwise, defaults to FALSE.}
+  \item{risktable.fontsize}{font size of the risk group table. Defaults to optimal.risktable.parameters.}
   \item{key.groups.corner}{A two-component vector specifiying which corner of the groups key will be anchored by key.groups.x.pos and key.groups.y.pos.  Defaults to c(0,0), i.e. bottom left corner.}
   \item{key.groups.x.pos}{Specifies the x position of the groups key (on scale of 0-1).  Defaults to 0}
   \item{key.groups.y.pos}{Specifies the y position of the groups key (on scale of 0-1).  Defaults to 0.01}
