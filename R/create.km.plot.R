@@ -61,6 +61,7 @@ create.km.plot <- function(
 	predefined.p = NULL,
 	predefined.hr = NULL,
 	predefined.hr.ci = NULL,
+  predefined.p.statistic.type = 'P',
 	ph.assumption.check = "warning",
 	cox.zph.threshold = 0.1,
 	cox.zph.truncation.thresholds = c(5, 10),
@@ -492,7 +493,11 @@ create.km.plot <- function(
 	if (! is.null(predefined.p)||!is.null(predefined.hr)) {
 	    if (!is.null(predefined.p))
 	    {
-		    statistical.result.pvalue <- BoutrosLab.plotting.general::display.statistical.result(x = predefined.p, digits = digits);
+		    statistical.result.pvalue <- BoutrosLab.plotting.general::display.statistical.result(
+          x = predefined.p, 
+          digits = digits,
+          statistic.type = predefined.p.statistic.type
+          );
 	    }
 	    if (!is.null(predefined.hr))
 	    {

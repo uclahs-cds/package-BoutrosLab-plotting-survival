@@ -40,6 +40,7 @@ create.km.plot(
 	predefined.p = NULL,
 	predefined.hr = NULL,
 	predefined.hr.ci = NULL,
+	predefined.p.statistic.type = 'P',
 	ph.assumption.check = "warning",
 	cox.zph.threshold = 0.1, 
 	cox.zph.truncation.thresholds = c(5, 10),
@@ -104,6 +105,7 @@ create.km.plot(
   \item{predefined.p}{A predefined p value (e.g. from a log likelihood test) to display on the plot IN PLACE OF any other statistical test (above)}
   \item{predefined.hr}{A predefined hazard ratio value to display on the plot IN PLACE OF the hazard ratio calculated from a cox test.This value will only be displayed if the cox test is used. If the user provides a predefined hazard ratio, then they MUST specify a confidence interval (see predefined.hr.ci)}
   \item{predefined.hr.ci}{A vector of two numeric values representing the boundaries of the confidence interval associated with the predefined hazard ratio. This vector should only be provided if a predefined hazard ratio is specified.}
+  \item{predefined.p.statistic.type}{String giving the type of predefined p-value statistic to be displayed. Passed directly to display.statistical.result function in BPG. Defaults to 'P'.}
   \item{ph.assumption.check}{A string indicating how the result of the Proportional Hazards assumption check (using the cox.zph function) should be reported.  If "warning", a warning is printed on the plot if the pvalue of cox.zph is smaller than cox.zph.threshold.  If "warning.and.plot", a warning is printed on the plot and a Schoenfeld residual plot is produced and saved if the pvalue is smaller than cox.zph.threshold.  If "logrank", the statistical method is changed to logrank if the pvalue is smaller than cox.zph.threshold.  If "residual.plot", the Schoenfled residual plot is produced and saved as a tiff, no matter what the results of the cox.zph test are.  If "ignore", the cox.zph test is not performed at all.  Defaults to "warning".}
   \item{cox.zph.threshold}{Numeric value, between 0 and 1).  If the pvalue of the cox.zph test is smaller than cox.zph.threshold, warnings will be provided to the user, indicating that the PH assumption may not be valid.  Defaults to 0.1}
   \item{cox.zph.truncation.thresholds}{If ph.assumption.check is not 'ignore', and a variable fails the CPH assumption, a multi-point table will be generated with CPH results for all variables at multiple time points. The truncation points specified here, indicate the time points at which to split the survival data. See BoutrosLab.statistics.general/R/multi.point.HR.table.R}

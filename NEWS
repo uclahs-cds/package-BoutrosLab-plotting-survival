@@ -1,3 +1,8 @@
+BoutrosLab.plotting.survival 3.0.5 2016-07-22 (Erle Holgersen)
+-----------------------------------------------------------------
+MINOR UPDATE
+* Added predefined.p.statistic.type argument to create.km.plot to allow for displaying q-value rather than p-value. The statistic type defaults to 'P', and is passed straight to the display.statistical.result function in BPG.
+
 BoutrosLab.plotting.survival 3.0.4 2016-04-28 (Jennifer Aguiar)
 -----------------------------------------------------------------
 MINOR UPDATES
