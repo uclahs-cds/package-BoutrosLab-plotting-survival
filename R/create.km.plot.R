@@ -235,7 +235,7 @@ create.km.plot <- function(
 	if (ngroups > length(line.colours)) {
 		stop('There are not enough colours to plot each risk group in a different colour.  Add more colours to the line.colours parameter or to the survival palette in default.colours.');
 		}
-
+  
 	# if the user hasn't set it, decide which statistical method to use
 	if (is.na(statistical.method) & is.null(predefined.p)) { 
 
@@ -245,11 +245,14 @@ create.km.plot <- function(
 		# if more than two risk groups, must use a log-rank test
 		else if (ngroups > 2) { statistical.method <- 'logrank'; } 
 
-		# if no events, must use a t-test
+		# if no censored observations, use a t-test
 		else if (all(1 == survival.object[, 'status'])) { statistical.method <- 'ttest'; }
-
-		# if no censored, must use a log-rank test
-		else if (all(0 == survival.object[, 'status'])) { statistical.method <- 'logrank'; }
+    
+    # If no events in one of groups (or both groups), use log-rank
+    # Already down to case with only two groups, only need to check first two levels of factor
+    else if( all(0 == survival.object[1 == as.numeric(as.factor(patient.groups)), 'status']) || all(0 == survival.object[2 == as.numeric(as.factor(patient.groups)), 'status']) ) {
+      statistical.method <- 'logrank';
+    }
 
 		# otherwise try a Cox model
 		else { statistical.method <- 'cox'; }

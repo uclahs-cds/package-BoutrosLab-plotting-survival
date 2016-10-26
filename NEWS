@@ -1,3 +1,9 @@
+BoutrosLab.plotting.survival 3.0.6 2016-10-26 (Erle Holgersen)
+-----------------------------------------------------------------
+MINOR UPDATES
+* Switched to log-rank test as default statistical method when no events in one or more groups.
+* Fixed t-test bug in statistical method logic
+
 BoutrosLab.plotting.survival 3.0.5 2016-07-22 (Erle Holgersen)
 -----------------------------------------------------------------
 MINOR UPDATE
