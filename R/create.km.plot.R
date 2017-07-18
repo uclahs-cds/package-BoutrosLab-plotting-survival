@@ -923,7 +923,7 @@ create.km.plot <- function(
 				args = list(
 					x = rep(risk.label.pos, times = ngroups),
 					y = unique(y.pos),
-					label = risk.labels,
+					label = c(risk.labels, ''),
 					just = 'left',
 					default.units = 'native',
 					gp = grid::gpar(fontsize = fontsize, fontface = risk.label.fontface),
