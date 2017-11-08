@@ -61,7 +61,7 @@ create.km.plot <- function(
 	predefined.p = NULL,
 	predefined.hr = NULL,
 	predefined.hr.ci = NULL,
-  predefined.p.statistic.type = 'P',
+	predefined.p.statistic.type = 'P',
 	ph.assumption.check = "warning",
 	cox.zph.threshold = 0.1,
 	cox.zph.truncation.thresholds = c(5, 10),
@@ -85,7 +85,8 @@ create.km.plot <- function(
 	resolution = 1000, 
 	size.units = 'in', 
 	enable.warnings = TRUE,
-	description = NULL
+	description = NULL,
+	use.legacy.settings = FALSE
 	) {
 
 	### INPUT VALIDATION ##########################################################################
@@ -160,7 +161,8 @@ create.km.plot <- function(
 			);
 		}
 
-	# if one of the risklabels is blank, replace it by "na" (as long as it is not the case that '1' is the only level of patient.groups, in which case risklabel should be left blank)
+	# if one of the risklabels is blank, replace it by "na" (as long as it is not the case that '1' is the only level of patient.groups,
+	# in which case risklabel should be left blank)
 	if (any('' == gsub(' ', '', risk.labels)) && '1' != levels(patient.groups)) {
 		for (i in 1:length(risk.labels)){
 			if ('' == gsub(' ', '', risk.labels)[i]) {
@@ -233,7 +235,7 @@ create.km.plot <- function(
 
 	# If there are more risk groups than there are colours in line.colours, throw an error
 	if (ngroups > length(line.colours)) {
-		stop('There are not enough colours to plot each risk group in a different colour.  Add more colours to the line.colours parameter or to the survival palette in default.colours.');
+		stop('There are not enough colours to plot each risk group in a different colour. Add more colours to the line.colours parameter or to the survival palette in default.colours.');
 		}
   
 	# if the user hasn't set it, decide which statistical method to use
@@ -248,11 +250,13 @@ create.km.plot <- function(
 		# if no censored observations, use a t-test
 		else if (all(1 == survival.object[, 'status'])) { statistical.method <- 'ttest'; }
     
-    # If no events in one of groups (or both groups), use log-rank
-    # Already down to case with only two groups, only need to check first two levels of factor
-    else if( all(0 == survival.object[1 == as.numeric(as.factor(patient.groups)), 'status']) || all(0 == survival.object[2 == as.numeric(as.factor(patient.groups)), 'status']) ) {
-      statistical.method <- 'logrank';
-    }
+		# If no events in one of groups (or both groups), use log-rank
+		# Already down to case with only two groups, only need to check first two levels of factor
+		else if (
+			all(0 == survival.object[1 == as.numeric(as.factor(patient.groups)), 'status']) ||
+			all(0 == survival.object[2 == as.numeric(as.factor(patient.groups)), 'status']) ) {
+			statistical.method <- 'logrank';
+			}
 
 		# otherwise try a Cox model
 		else { statistical.method <- 'cox'; }
@@ -284,7 +288,7 @@ create.km.plot <- function(
 
 	# if patient.group is a factor, inform the user of which group is used as baseline
 	if (is.factor(patient.groups) & 'cox' == statistical.method) {
-		warning('Note that the risk group labelled ', levels(patient.groups)[1], ' will be used as the baseline risk group.  If this is not what is desired, please add a "levels" argument to the factor passed to patient.groups, where the first factor refers to the baseline group');
+		warning('Note that the risk group labelled ', levels(patient.groups)[1], ' will be used as the baseline risk group. If this is not what is desired, please add a "levels" argument to the factor passed to patient.groups, where the first factor refers to the baseline group');
 		}
 
 	# if patient.groups is not a factor, coerce it into one.  Additionally, if
@@ -292,11 +296,13 @@ create.km.plot <- function(
 	if (!is.factor(patient.groups)) {
 		patient.groups <- as.factor(patient.groups);
 		if ('cox' == statistical.method) {
-			warning(paste('The argument you passed to patient.groups was not a factor.  The risk group labelled ', levels(patient.groups)[1], ' will be used as the baseline risk group'));
+			warning(paste('The argument you passed to patient.groups was not a factor. The risk group labelled ', levels(patient.groups)[1], ' will be used as the baseline risk group'));
 			}
 		}
 
-	# Set the contrast attribute of patient.groups to contr.treatment when there are two or more levels, to ensure each group is compared to the baseline group, in the statistical analysis, if appropriate. Note that C() is the contrast setting function, to be distinguished from the concatenation argument, c().
+	# Set the contrast attribute of patient.groups to contr.treatment when there are two or more levels, to ensure each group is compared 
+	# to the baseline group, in the statistical analysis, if appropriate. Note that C() is the contrast setting function, to be distinguished
+	# from the concatenation argument, c().
 	if (1 < ngroups) {
 		patient.groups <- C(patient.groups, contr.treatment);
 		}
@@ -489,34 +495,33 @@ create.km.plot <- function(
 	### Statistical Analysis ###########################################################################
 	### Predefined p-value (e.g. from log likelihood test), just format the pvalue properly
 	
-			# Define default value of result.zph.  If the PH assumption fails and a warning on the plot
-		# is requested, the value of result.zph will be updated to contain the warning.
+	# Define default value of result.zph.  If the PH assumption fails and a warning on the plot
+	# is requested, the value of result.zph will be updated to contain the warning.
 
 	result.zph <- "";
 	if (! is.null(predefined.p)||!is.null(predefined.hr)) {
-	    if (!is.null(predefined.p))
-	    {
-		    statistical.result.pvalue <- BoutrosLab.plotting.general::display.statistical.result(
-          x = predefined.p, 
-          digits = digits,
-          statistic.type = predefined.p.statistic.type
-          );
-	    }
-	    if (!is.null(predefined.hr))
-	    {
-	        if (statistical.method!="cox")
-	        {
-	            warning("The statistical method used was not cox, and hence the provided hr value will not be printed");
-            }
-	        # double check that the predefined.hr.ci is provided
-	        if (is.null(predefined.hr.ci))
-	        {
-	            stop("If the hazard ratio is predefined, then predefined.hr.ci cannot be NULL");
-	        }else if (length(predefined.hr.ci)!=2)
-	        {
-	            stop("The hazard ratio must be provided with exactly two CI bound values");
-	        }
-	        statistical.result.hr <- substitute( 
+		if (!is.null(predefined.p)) {
+			statistical.result.pvalue <- BoutrosLab.plotting.general::display.statistical.result(
+				x = predefined.p,
+				digits = digits,
+				statistic.type = predefined.p.statistic.type
+				);
+			}
+
+		if (!is.null(predefined.hr)) {
+			if (statistical.method != "cox") {
+				warning("The statistical method used was not cox, and hence the provided hr value will not be printed");
+				}
+
+		        # double check that the predefined.hr.ci is provided
+		        if (is.null(predefined.hr.ci)) {
+				stop("If the hazard ratio is predefined, then predefined.hr.ci cannot be NULL.");
+				}
+			else if (length(predefined.hr.ci) != 2) {
+				stop("The hazard ratio must be provided with exactly two CI bound values.");
+				}
+
+			statistical.result.hr <- substitute( 
 				expr = paste('HR'[comparison.group], ': ', this.hr, ' (', this.95l, ',', this.95u, ')', sep=''),
 				env = list(
 					comparison.group = key.groups.labels[2],
@@ -525,8 +530,8 @@ create.km.plot <- function(
 					this.95u = signif(max(predefined.hr.ci[1],predefined.hr.ci[2]),digits=2)
 					)
 				);
-	    }
-	}
+			}
+		}
 	
 	### Cox modelling analysis ###
 	else if ('cox' == statistical.method) {  
@@ -547,14 +552,12 @@ create.km.plot <- function(
 		this.95u  <- round(stats[3], digits = digits);
 		this.pval <- stats[4];
 
-
-
 		# fit coxmodel using coxph, and then run cox.zph
 		if (ph.assumption.check != "ignore") {  
-			if(length(levels(patient.groups)) == 1){
+			if (length(levels(patient.groups)) == 1) {
 				warning("Only one patient group. Can't check proportional hazard assumptions!!!");
 				}
-			else{
+			else {
 				cox.model <- fit.coxmodel(
 					groups = patient.groups,
 					survobj = survival.object,
@@ -570,11 +573,17 @@ create.km.plot <- function(
 
 				# If cox.zph suggests that PH assumption fails, print warning to the screen			
 				if (ph.failed) {
-					warning(paste("The cox.zph test yielded a small pvalue for the following factors: ", names(pvalues.zph[pvalues.zph<cox.zph.threshold]), ", so the PH assumption may not be valid.  Use a non-parametric test (log-rank) to get the pvalue.  If Cox modelling is desired, use stratified model or time-varying covariate.  Talk to Paul if you are not sure what to do.", sep=""))
+					warning(paste0(
+						"The cox.zph test yielded a small pvalue for the following factors: ", 
+						names(pvalues.zph[pvalues.zph<cox.zph.threshold]),
+						", so the PH assumption may not be valid. Use a non-parametric test (log-rank) to get the pvalue.",
+						" If Cox modelling is desired, use stratified model or time-varying covariate.",
+						" Talk to Paul if you are not sure what to do."
+						));
 					
 					# print the multi-point HR table
 					warning("SEE BELOW FOR MULTI-POINT HR TABLE:");
-					if(is.null(covariates)){
+					if (is.null(covariates)) {
 						print(BoutrosLab.statistics.survival::multi.point.HR.table(
 							all.groups = patient.groups, 
 							all.survtime = as.vector(as.matrix(survival.object)[,'time']), 
@@ -582,7 +591,7 @@ create.km.plot <- function(
 							truncation.thresholds = cox.zph.truncation.thresholds
 							)); 
 						}
-					else{
+					else {
 						print(BoutrosLab.statistics.survival::multi.point.HR.table(
 							all.groups = patient.groups, 
 							all.survtime = as.vector(as.matrix(survival.object)[,'time']), 
@@ -598,7 +607,8 @@ create.km.plot <- function(
 					result.zph <-  c("WARNING: Small cox.zph", "pvalue for one or more factors.");
 					}
 
-				# Produce Schoenfeld residual plots for each beta if they were requested and at least one of the cox.zph pvalues is smaller than cox.zph.threshold
+				# Produce Schoenfeld residual plots for each beta if they were requested and at least one of the 
+				# cox.zph pvalues is smaller than cox.zph.threshold
 				if (ph.assumption.check %in% c("residual.plot", "warning.and.plot") & ph.failed) {
 					BoutrosLab.plotting.survival::schoenfeld.residual.plots(cox.model = cox.model, filename = filename);	
 					} 
@@ -606,7 +616,7 @@ create.km.plot <- function(
 				if (ph.assumption.check %in% c('logrank') & ph.failed) {
 					statistical.method <- 'logrank';
 					statistical.result <- '';
-					warning("The cox.zph test yielded a small pvalue so the PH assumption may not be valid.  The statistical method was changed from 'cox' to 'logrank', because the logrank test is nonparametric.  Talk to Paul if you are not sure what to do.");
+					warning("The cox.zph test yielded a small pvalue so the PH assumption may not be valid. The statistical method was changed from 'cox' to 'logrank', because the logrank test is nonparametric. Talk to Paul if you are not sure what to do.");
 					}
 				}
 			}
@@ -676,7 +686,6 @@ create.km.plot <- function(
 	if ('cox' == statistical.method) {
 		key.stats <- list(
 			text = list(
-#			       lab = c(statistical.result.hr, statistical.result.pvalue),
 				lab = c(result.zph, statistical.result.hr, statistical.result.pvalue),
 				col = 'black',
 				cex = key.stats.cex 
@@ -684,7 +693,7 @@ create.km.plot <- function(
 			);
 		}
 
-	else if (!is.na(statistical.method)){
+	else if (!is.na(statistical.method)) {
 		key.stats <- list(
 			text = list(
 				lab = statistical.result,
@@ -694,14 +703,14 @@ create.km.plot <- function(
 			);
 		}
 
-	else if(!is.null(predefined.p)){
+	else if (!is.null(predefined.p)) {
 		key.stats <- list(
 			text = list(
 				lab = statistical.result.pvalue,
 				col = 'black',
 				cex = key.stats.cex
 				)
-		);
+			);
 		}
 
 	### Invalid statistical method - this case should never occur ###
@@ -828,10 +837,10 @@ create.km.plot <- function(
 			# extract pre-set parameters overridden if input parameter is not NULL
 			if (!is.null(risktable.fontsize)) { 
 				fontsize <- risktable.fontsize;
-			}
-			else{
+				}
+			else {
 				fontsize <- optimal.risktable.parameters$fontsize[rows.to.use];
-			}
+				}
 			risktable.height <- grid::unit(optimal.risktable.parameters$risktable.height[rows.to.use], 'npc');
 			risktable.y <- grid::unit(optimal.risktable.parameters$risktable.y[rows.to.use], 'npc');
 			bottom.padding <- optimal.risktable.parameters$bottom.padding[rows.to.use];
@@ -937,7 +946,8 @@ create.km.plot <- function(
 					)
 				)
 			),
-		description = description
+		description = description,
+		use.legacy.settings = use.legacy.settings,
 		);
 
 	### RETURN VALUE ##############################################################################

@@ -64,7 +64,8 @@ create.km.plot(
 	resolution = 1000, 
 	size.units = 'in', 
 	enable.warnings = TRUE,
-	description = NULL 
+	description = NULL,
+	use.legacy.settings = FALSE 
 	);
 }
 
@@ -129,7 +130,8 @@ create.km.plot(
   \item{resolution}{Figure resolution in dpi}
   \item{size.units}{Units of size for the figure}
   \item{enable.warnings}{Print warnings if set to TRUE, defaults to TRUE}
-  \item{description}{Short description of image/plot; defaults to NULL}
+  \item{description}{short description of image/plot; defaults to null}
+  \item{use.legacy.settings}{boolean to set wheter or not to use legacy mode settings (font)}
 }
 
 \value{If return.stats is TRUE: if \code{filename} is \code{NULL} then returns the trellis object, otherwise creates a plot and returns a 0/1 success code.  If return.stats is FALSE: returns a list whose first element is the trellis object if \code{filename}) is \code{NULL}, 0/1 otherwise, and whose other elements are relevent statistics.}

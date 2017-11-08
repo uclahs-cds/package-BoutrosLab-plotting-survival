@@ -1,3 +1,8 @@
+BoutrosLab.plotting.survival 3.0.8 2017-11-08 (Stephenie Prokopec)
+-----------------------------------------------------------------
+MINOR UPDATES
+* added use.legacy.settings to create.km.plot to allow for font matching 
+
 BoutrosLab.plotting.survival 3.0.6 2016-10-26 (Erle Holgersen)
 -----------------------------------------------------------------
 MINOR UPDATES
