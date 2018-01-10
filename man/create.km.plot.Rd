@@ -17,6 +17,8 @@ create.km.plot(
 	xlab.cex = 2.75,
 	ylab.label = 'Estimated Proportion',
 	ylab.cex = 2.75,
+        xaxis.fontface = 'bold',
+        yaxis.fontface = 'bold',
 	risk.labels = NA,
 	key.groups.labels = levels(as.factor(patient.groups)),
 	key.groups.cex = 2,
@@ -83,6 +85,8 @@ create.km.plot(
   \item{xlab.cex}{Size of x-axis labels, defaults to 2.75}
   \item{ylab.label}{Y Axis Title.  Defaults to "Proportion", but should be customized to better describe survival outcome of interest.}
   \item{ylab.cex}{Size of y-axis labels, defaults to 2.75}
+  \item{xaxis.fontface}{font face of the xaxis, defaults to bold}
+  \item{yaxis.fontface}{font face of the yaxis, defaults to bold}
   \item{risk.labels}{A character vector that gives the labels for risk groups in risk table.  Defaults to full name of each risk group if there is more than one risk group, and to a blank string otherwise.  Useful to replace long names by shorter ones.)}
   \item{key.groups.labels}{A character vector that gives the labels in the legend (listing name and line colour for each group).  Defaults to full name of risk groups.  Useful to replace long names by shorter ones.}
   \item{key.groups.cex}{Size of key groups text}

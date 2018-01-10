@@ -38,6 +38,8 @@ create.km.plot <- function(
 	xlab.cex = 2.75,
 	ylab.label = 'Estimated Proportion',
 	ylab.cex = 2.75,
+        xaxis.fontface = 'bold',
+        yaxis.fontface = 'bold',
 	risk.labels = NA,
 	key.groups.labels = levels(as.factor(patient.groups)),
 	key.groups.cex = 2,
@@ -890,6 +892,8 @@ create.km.plot <- function(
 		left.padding = left.padding,
 		right.padding = right.padding,
 		top.padding = top.padding,
+		xaxis.fontface = xaxis.fontface,
+		yaxis.fontface = yaxis.fontface,
 		width = width, 
 		height = height, 
 		legend = list(
