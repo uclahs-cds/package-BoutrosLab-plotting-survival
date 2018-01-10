@@ -1,5 +1,5 @@
 Package: BoutrosLab.plotting.survival
-Version: 3.09.
+Version: 3.0.9
 Type: Package
 Title: Functions to Plot Survival Data
 Date: 2018-01-10
