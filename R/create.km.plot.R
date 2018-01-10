@@ -83,7 +83,8 @@ create.km.plot <- function(
 	left.padding = 0.5,
 	return.statistics = FALSE,
 	height = 7, 
-	width = 7, 
+	width = 7,
+	style = 'BoutrosLab', 
 	resolution = 1000, 
 	size.units = 'in', 
 	enable.warnings = TRUE,
@@ -896,6 +897,7 @@ create.km.plot <- function(
 		yaxis.fontface = yaxis.fontface,
 		width = width, 
 		height = height, 
+		style = style,
 		legend = list(
 			inside = list(
 				fun = draw.key,

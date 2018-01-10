@@ -63,6 +63,7 @@ create.km.plot(
 	return.statistics = FALSE,
 	height = 7, 
 	width = 7, 
+	style = 'BoutrosLab',
 	resolution = 1000, 
 	size.units = 'in', 
 	enable.warnings = TRUE,
@@ -131,6 +132,7 @@ create.km.plot(
   \item{return.statistics}{If TRUE, function will return a list containing trellis object (or 0/1 indicator) and relevant statistics.  If FALSE, no statistics are returned.  Defaults to FALSE.}
   \item{height}{Figure height in size.units}
   \item{width}{Figure width in size.units}
+  \item{style}{defaults to \dQuote{BoutrosLab}, also accepts \dQuote{Nature}, which changes parameters according to Nature formatting requirements}
   \item{resolution}{Figure resolution in dpi}
   \item{size.units}{Units of size for the figure}
   \item{enable.warnings}{Print warnings if set to TRUE, defaults to TRUE}
