@@ -77,7 +77,7 @@ create.km.plot <- function(
 	key.stats.x.pos = 1, 
 	key.stats.y.pos = 0.01, 
 	ylab.axis.padding = 1,
-	bottom.padding = 0.7,  
+	bottom.padding = 2,  
 	top.padding = 0.1,
 	right.padding = 0.1,
 	left.padding = 0.5,
@@ -788,9 +788,8 @@ create.km.plot <- function(
 		else if (2 <= ngroups) { 
 			y.pos <- c();
 			for (i in ngroups:1) {
-				y.pos <- c(y.pos, rep(0.5 + (i-1) * 0.5 / (ngroups-1), times = length(xat)));
+				y.pos <- c(y.pos, rep((i-1) / (ngroups-1), times = length(xat)));
 				}
-			y.pos <- c(y.pos, 0);
 			}
 
 		# This case should never be reached, as ngroups should always be greater or equal to 1
@@ -844,10 +843,8 @@ create.km.plot <- function(
 			else {
 				fontsize <- optimal.risktable.parameters$fontsize[rows.to.use];
 				}
-			risktable.height <- grid::unit(optimal.risktable.parameters$risktable.height[rows.to.use], 'npc');
-			risktable.y <- grid::unit(optimal.risktable.parameters$risktable.y[rows.to.use], 'npc');
-			bottom.padding <- optimal.risktable.parameters$bottom.padding[rows.to.use];
-
+			risktable.height <- grid::unit(ngroups*15, 'points');
+			risktable.y <- grid::unit(0.5, 'npc');
 			}
 		}
 
@@ -888,7 +885,7 @@ create.km.plot <- function(
 		lwd = lwd,
 		add.axes = FALSE,
 		axis.lwd = 1,
-		bottom.padding = bottom.padding,
+		bottom.padding = 2,
 		ylab.axis.padding = ylab.axis.padding,
 		left.padding = left.padding,
 		right.padding = right.padding,
@@ -921,7 +918,7 @@ create.km.plot <- function(
 					x = c(rep(xat, times = ngroups), xat[1]),
 					y = y.pos,
 					label = number.at.risk,
-					just = 'center',
+					just = 'top',
 					default.units = 'native',
 					gp = grid::gpar(fontsize=fontsize),
 					vp = grid::viewport(
@@ -929,7 +926,7 @@ create.km.plot <- function(
 						yscale = c(0,1),
 						height = risktable.height,
 						x = grid::unit(0.5,'native'),
-						y = risktable.y
+						y = risktable.y 
 						)
 					)
 				),
@@ -939,7 +936,7 @@ create.km.plot <- function(
 					x = rep(risk.label.pos, times = ngroups),
 					y = unique(y.pos),
 					label = c(risk.labels, ''),
-					just = 'left',
+					just = c('left','top'),
 					default.units = 'native',
 					gp = grid::gpar(fontsize = fontsize, fontface = risk.label.fontface),
 					vp = grid::viewport(
@@ -947,15 +944,16 @@ create.km.plot <- function(
 						yscale = c(0,1),
 						height = risktable.height,
 						x = grid::unit(0.5,'native'),  # unit(0.5,'native'),
-						y = risktable.y
+						y = risktable.y 
 						)
 					)
-				)
+	        		)
 			),
 		description = description,
 		use.legacy.settings = use.legacy.settings,
 		);
-
+	km.plot$par.settings$layout.heights$key.top <- 1;
+        km.plot$par.settings$layout.heights$key.bottom <- 1;
 	### RETURN VALUE ##############################################################################
 	# Return value of the function make.survival.plot()
 	# If no filename is provided in the call to make.survival.plot, a trellis object is returned,

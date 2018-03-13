@@ -56,7 +56,7 @@ create.km.plot(
 	key.stats.x.pos = 1, 
 	key.stats.y.pos = 0.01, 
 	ylab.axis.padding = 1,
-	bottom.padding = 0.7,  
+	bottom.padding = 2,  
 	top.padding = 0.1,
 	right.padding = 0.1,
 	left.padding = 0.5,
