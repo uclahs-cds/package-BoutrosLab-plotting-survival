@@ -1,0 +1,10 @@
+---
+Category: 'tool'
+Description: 'BoutrosLab plotting survival'
+Maintainers: ['PBoutros@mednet.ucla.edu']
+Contributors: 'Dr. Paul C. Boutros'
+Languages: ['R']
+Dependencies: ['R (>= 2.13.1)', 'survival (>= 2.36-9)', 'stringr', 'data.table', 'doParallel', 'parallel', 'rbenchmark']
+References: ''
+Version: '3.0.10'
+Purpose of tool: 'Functions to plot survival data'
