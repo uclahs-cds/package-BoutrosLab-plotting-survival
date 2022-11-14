@@ -38,8 +38,8 @@ create.km.plot <- function(
 	xlab.cex = 2.75,
 	ylab.label = 'Estimated Proportion',
 	ylab.cex = 2.75,
-        xaxis.fontface = 'bold',
-        yaxis.fontface = 'bold',
+    xaxis.fontface = 'bold',
+	yaxis.fontface = 'bold',
 	risk.labels = NA,
 	key.groups.labels = levels(as.factor(patient.groups)),
 	key.groups.cex = 2,
@@ -66,7 +66,7 @@ create.km.plot <- function(
 	predefined.p.statistic.type = 'P',
 	ph.assumption.check = "warning",
 	cox.zph.threshold = 0.1,
-	cox.zph.truncation.thresholds = c(5, 10),
+	cox.zph.truncation.thresholds = NULL,
 	show.key.groups = NA, 
 	show.risktable = TRUE,
 	risktable.fontsize = NULL, 
@@ -497,7 +497,7 @@ create.km.plot <- function(
 
 	### Statistical Analysis ###########################################################################
 	### Predefined p-value (e.g. from log likelihood test), just format the pvalue properly
-	
+
 	# Define default value of result.zph.  If the PH assumption fails and a warning on the plot
 	# is requested, the value of result.zph will be updated to contain the warning.
 
@@ -535,7 +535,7 @@ create.km.plot <- function(
 				);
 			}
 		}
-	
+
 	### Cox modelling analysis ###
 	else if ('cox' == statistical.method) {  
 
