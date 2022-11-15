@@ -1,5 +1,5 @@
 # BoutrosLab.plotting.survival
-`BoutrosLab.plotting.survival` is a
+`BoutrosLab.plotting.survival` is a collections of survival analysis visualization tools, including Kaplan-Meier curves, progonsis plots and schoenfeld residual plots.
 
 ## Installation
 ### Package Dependency
@@ -40,19 +40,12 @@ create.km.plot(
 );
 
 # Plot Gene Meta Prognosis
-create.
+Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/Biomarkers/ProstateCancer/cirDNA_Methylation/PilotStudy/compare_to_primary_data/prostate.cancer_univariate.survival.analysis.R)
 
-#
+# Plot multifeature meta prognosis
+Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/Collaborators/RodBremner/SB32/Hypoxia_gene_signature.R)
 
-#
-
+# Plot Schoenfeld residual plot
+Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/CPC-GENE/mitochondrial_survey/test_create_kmplot_3legend.R)
 
 ```
-
-## Parameters and Options
-###
-
-
-
-### Reference
-
