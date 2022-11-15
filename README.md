@@ -38,14 +38,27 @@ create.km.plot(
   survival.object = Surv(cancer.data$time, cancer.data$status),
   patient.groups = as.factor(cancer.data$sex)
 );
+
+# Plot the Competing Risk Cumlative Incidence Function
+library('riskRegression');
+library('cmprsk');
+data(Melanoma);
+
+create.cr.plot(
+  data = Melanoma,
+  formula = time ~ status,
+  patient.groups = epicel,
+  filename = 'test.pdf'
+);
+
 ```
-# Plot Gene Meta Prognosis
+### Plot Gene Meta Prognosis
 Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/Biomarkers/ProstateCancer/cirDNA_Methylation/PilotStudy/compare_to_primary_data/prostate.cancer_univariate.survival.analysis.R)
 
-# Plot multifeature meta prognosis
+### Plot multifeature meta prognosis
 Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/Collaborators/RodBremner/SB32/Hypoxia_gene_signature.R)
 
-# Plot Schoenfeld residual plot
+### Plot Schoenfeld residual plot
 Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/CPC-GENE/mitochondrial_survey/test_create_kmplot_3legend.R)
 
 
