@@ -38,7 +38,7 @@ create.km.plot(
   survival.object = Surv(cancer.data$time, cancer.data$status),
   patient.groups = as.factor(cancer.data$sex)
 );
-
+```
 # Plot Gene Meta Prognosis
 Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/Biomarkers/ProstateCancer/cirDNA_Methylation/PilotStudy/compare_to_primary_data/prostate.cancer_univariate.survival.analysis.R)
 
@@ -48,4 +48,4 @@ Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/bl
 # Plot Schoenfeld residual plot
 Example analysis can be found [here](https://github.com/uclahs-cds/BoutrosLab/blob/792c95d41d4a09bd7d42c43d660b6c240ce186a3/CPC-GENE/mitochondrial_survey/test_create_kmplot_3legend.R)
 
-```
+
