@@ -1,5 +1,25 @@
-# Clone of survival:::plot.cox.zph but for BPG
-plot.cox.zph.bpg <- function(
+#' Clone of survival:::plot.cox.zph but for BPG
+#'
+#' @param resid a logical value, if TRUE the residuals are included on the plot, as well as the smooth fit.
+#' @param se a logical value, if TRUE, confidence bands at two standard errors will be added.
+#' @param df the degrees of freedom for the fitted natural spline, df=2 leads to a linear fit.
+#' @param nsmo	number of points to use for the lines
+#' @param var the set of variables for which plots are desired. By default, plots are produced in turn for each variable of a model. Selection of a single variable allows other features to be added to the plot, e.g., a horizontal line at zero or a main title. This has been superseded by a subscripting method; see the example below.
+#' @param hr if TRUE, label the y-axis using the estimated hazard ratio rather than the estimated coefficient. (The plot does not change, only the axis label.)
+#' @param xlab.label label for the x-axis of the plot
+#' @param ylab.label optional label for the y-axis of the plot. If missing a default label is provided. This can be a vector of labels.
+#' @param lty
+#' @param col
+#' @param lwd
+#' @param abline.h
+#' @param abline.col
+#' @param abline.lwd
+#' @param abline.lty
+#' @param ... additional graphical arguments passed to the create.scatterplot function.
+#'
+#' @export create.schoenfeld.plot
+#' @export
+plot.cox.zph <- create.schoenfeld.plot <- function(
     x,
     resid=TRUE,
     se=TRUE,
@@ -10,6 +30,10 @@ plot.cox.zph.bpg <- function(
     col=1,
     lwd=1,
     hr = FALSE,
+    abline.h = 0,
+    abline.col = 'darkgrey',
+    abline.lwd = 1,
+    abline.lty = 2,
     xlab.label = 'Time (transformation)',
     ylab.label = expression(bold(beta~'(t) for <var>')),
     ...
@@ -129,7 +153,7 @@ plot.cox.zph.bpg <- function(
                     formula = y ~ x,
                     data = plot.data,
                     type = 'n',
-                    ylab.label = ylab.label,
+                    ylab.label = ylab.label[[i]],
                     xlab.label = xlab.label,
                     yaxis.log = yaxis.log,
                     ...
@@ -146,7 +170,7 @@ plot.cox.zph.bpg <- function(
                         type = 'n',
                         xaxis.log = xaxis.log,
                         yaxis.log = yaxis.log,
-                        ylab.label = ylab.label,
+                        ylab.label = ylab.label[[i]],
                         xlab.label = xlab.label,
                         xat = xaxisval,
                         xaxis.lab = xaxislab,
@@ -159,7 +183,7 @@ plot.cox.zph.bpg <- function(
                         type = 'n',
                         xaxis.log = xaxis.log,
                         yaxis.log = yaxis.log,
-                        ylab.label = ylab.label,
+                        ylab.label = ylab.label[[i]],
                         xlab.label = xlab.label,
                         ...
                         )
@@ -176,6 +200,10 @@ plot.cox.zph.bpg <- function(
                         data = points.data,
                         xaxis.log = xaxis.log,
                         yaxis.log = yaxis.log,
+                        abline.h = abline.h,
+                        abline.col = abline.col,
+                        abline.lwd = abline.lwd,
+                        abline.lty = abline.lty,
                         ...
                         )
                     }
