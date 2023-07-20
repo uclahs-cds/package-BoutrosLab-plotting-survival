@@ -8,13 +8,13 @@
 #' @param hr if TRUE, label the y-axis using the estimated hazard ratio rather than the estimated coefficient. (The plot does not change, only the axis label.)
 #' @param xlab.label label for the x-axis of the plot
 #' @param ylab.label optional label for the y-axis of the plot. If missing a default label is provided. This can be a vector of labels.
-#' @param lty
-#' @param col
-#' @param lwd
-#' @param abline.h
-#' @param abline.col
-#' @param abline.lwd
-#' @param abline.lty
+#' @param lty line type for spline and error. If length 2 then second is used for error bar.
+#' @param col color for spline and error. If length 2 then second is used for error bar.
+#' @param lwd line width for spline and error. If length 2 then second is used for error bar.
+#' @param abline.h horizontal line y (default 0)
+#' @param abline.col horizontal line color
+#' @param abline.lwd horizontal line width
+#' @param abline.lty horizontal line type
 #' @param ... additional graphical arguments passed to the create.scatterplot function.
 #'
 #' @export create.schoenfeld.plot
@@ -108,9 +108,9 @@ plot.cox.zph <- create.schoenfeld.plot <- function(
 
         qmat <- qr(xmat[keep,])
         if (qmat$rank < df) {
-            warning('spline fit is singular, variable ', i, ' skipped')
-            next
-        }
+            warning('spline fit is singular, variable ', i, ' skipped');
+            return(NULL);
+            }
 
         yhat <- pmat %*% qr.coef(qmat, y)
         if (resid) yr <-range(yhat, y)
