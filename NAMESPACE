@@ -8,10 +8,12 @@ export(
 	"make.survfit.plot",
 	"make.survival.plot",
 	"make.survival.plot.ternary",
-	"schoenfeld.residual.plots"
+	"schoenfeld.residual.plots",
+	"create.schoenfeld.plot"
 	);
+S3method(plot,cox.zph);
 importFrom("grDevices", "dev.cur", "dev.off", "ps.options", "tiff");
 importFrom("graphics", "abline", "plot", "title");
 importFrom("stats", "C", "contr.treatment", "pchisq", "t.test");
-importFrom("utils", "read.table", "write.table"); 
+importFrom("utils", "read.table", "write.table");
 import ("BoutrosLab.plotting.general", "BoutrosLab.prognosticsignature.general", "BoutrosLab.statistics.general", "BoutrosLab.statistics.survival", "BoutrosLab.utilities", lattice,survival);
