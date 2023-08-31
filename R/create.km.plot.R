@@ -696,7 +696,7 @@ create.km.plot <- function(
 			);
 		}
 
-	else if (!is.na(statistical.method)) {
+	else if (!is.na(statistical.method) & statistical.method != 'none') {
 		key.stats <- list(
 			text = list(
 				lab = statistical.result,
