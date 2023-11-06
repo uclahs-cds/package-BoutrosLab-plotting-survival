@@ -6,3 +6,5 @@
 ^docs$
 ^pkgdown$
 ^.*\.{jpeg,png,gif,tiff}$
+^LICENSE\.md$
+^README\.md$
