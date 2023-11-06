@@ -8,3 +8,4 @@
 ^.*\.{jpeg,png,gif,tiff}$
 ^LICENSE\.md$
 ^README\.md$
+.cicd-env
