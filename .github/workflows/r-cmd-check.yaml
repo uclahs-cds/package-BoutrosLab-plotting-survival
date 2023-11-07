@@ -12,4 +12,4 @@ jobs:
   R-CMD-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: uclahs-cds/tool-R-CMD-check-action@CEV
+      - uses: uclahs-cds/tool-R-CMD-check-action@stable
