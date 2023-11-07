@@ -1,2 +1,11 @@
 ^\.github$
 ^metadata\.yaml$
+^.*\.Rproj$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^.*\.{jpeg,png,gif,tiff}$
+^LICENSE\.md$
+^README\.md$
+.cicd-env
